@@ -10,14 +10,14 @@
 #
 # Copyright 2014 Agix Pty Ltd. All Rights Reserved.
 #
-define acount::resources::rsa_keys (
+define account::resources::rsa_keys (
   $ensure         = present,
   $username       = $name,
   $ssh_key_type   = 'ssh-rsa',
   $ssh_key        = $name,
 ) {
   $the_md5   = str2md5($ssh_key)
-  $full_name = "${username}-{$the_md5}"
+  $full_name = "${username}-${the_md5}"
 
   notice("Full name: ${full_name}")
 }
