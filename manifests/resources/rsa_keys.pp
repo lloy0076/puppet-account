@@ -19,5 +19,9 @@ define account::resources::rsa_keys (
   $the_md5   = str2md5($ssh_key)
   $full_name = "${username}-${the_md5}"
 
-  notice("Full name: ${full_name}")
+  ssh_authorized_key { $full_name:
+    user => $username,
+    type => $ssh_key_type,
+    key  => $ssh_key,
+  }
 }
