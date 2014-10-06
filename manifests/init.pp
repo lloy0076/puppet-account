@@ -237,9 +237,10 @@ define account(
 
     # Default to RSA keys.
     account::resources::ssh_authorized_keys{ $rsa_keys: 
-      ensure => $ensure,
-      type   => 'ssh-rsa',
-      user   => $username, 
+      ensure  => $ensure,
+      type    => 'ssh-rsa',
+      user    => $username, 
+      require => User[$title],
     }
   }
 
@@ -248,9 +249,10 @@ define account(
 
     # Default to RSA keys.
     account::resources::ssh_authorized_keys{ $rsa_keys: 
-      ensure => $ensure,
-      type   => 'ssh-dsa',
-      user   => $username, 
+      ensure  => $ensure,
+      type    => 'ssh-dsa',
+      user    => $username, 
+      require => User[$title],
     }
   }
 }
