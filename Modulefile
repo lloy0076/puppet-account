@@ -1,5 +1,5 @@
 name         'torrancew-account'
-version      '0.0.9'
+version      '0.0.10'
 source       'https://github.com/torrancew/puppet-account'
 author       'torrancew'
 license      'Apache License, Version 2.0'

@@ -75,7 +75,11 @@
 #   Defaults to undef.
 #
 # [*rsa_keys*]
-#   An array of SSH key data. =
+#   An array of RSA type SSH key data (this is the most usual type).
+#  Defaults to undef.
+# 
+# [*dsa_keys*]
+#   An array of DSA type SSH key data.
 #  Defaults to undef.
 # 
 # [*comment*]
@@ -107,7 +111,7 @@ define account(
   $create_group = true, $system = false, $uid = undef, $ssh_key = undef,
   $ssh_key_type = 'ssh-rsa', $groups = [], $ensure = present,
   $comment= "${title} Puppet-managed User", $gid = 'users', $ssh_keys = undef,
-  $rsa_keys = undef
+  $rsa_keys = undef, $dsa_keys,
 ) {
 
   if $home_dir == undef {
@@ -231,8 +235,21 @@ define account(
   if $rsa_keys != undef {
     validate_array($rsa_keys)
 
-    account::resources::rsa_keys { $rsa_keys: 
+    # Default to RSA keys.
+    account::resources::ssh_authorized_keys{ $rsa_keys: 
       ensure   => $ensure,
+      type     => 'ssh-rsa',
+      username => $username, 
+    }
+  }
+
+  if $dsa_keys != undef {
+    validate_array($dsa_keys)
+
+    # Default to RSA keys.
+    account::resources::ssh_authorized_keys{ $rsa_keys: 
+      ensure   => $ensure,
+      type     => 'ssh-dsa',
       username => $username, 
     }
   }

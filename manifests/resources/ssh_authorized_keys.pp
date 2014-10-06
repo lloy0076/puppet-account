@@ -1,6 +1,6 @@
-# == Class: account::rsa_keys.
+# == Class: account::ssh_authorized_keys.
 #
-# Sets up an RSA key; uses the 'username + sha' of the RSA as the key name.
+# Sets up SSH authorized keys.
 #
 # === Authors
 #
@@ -10,7 +10,7 @@
 #
 # Copyright 2014 Agix Pty Ltd. All Rights Reserved.
 #
-define account::resources::rsa_keys (
+define account::resources::ssh_authorized_keys (
   $ensure         = present,
   $username       = $name,
   $ssh_key_type   = 'ssh-rsa',
