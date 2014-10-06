@@ -74,6 +74,10 @@
 #     { key1 => { type => 'ssh-rsa', key => 'AAAZZZ...' } }
 #   Defaults to undef.
 #
+# [*rsa_keys*]
+#   An array of SSH key data. =
+#  Defaults to undef.
+# 
 # [*comment*]
 #   Sets comment metadata for the user
 #
@@ -222,5 +226,13 @@ define account(
 
     create_resources('ssh_authorized_key', $ssh_keys, $defaults)
   }
-}
 
+  if $rsa_keys != undef {
+    validate_array($rsa_keys)
+
+    account::rsa_keys { $rsa_keys: 
+      ensure   => $ensure,
+      username => $username, 
+    }
+  }
+}
