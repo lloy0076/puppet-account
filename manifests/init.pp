@@ -231,7 +231,7 @@ define account(
   if $rsa_keys != undef {
     validate_array($rsa_keys)
 
-    account::rsa_keys { $rsa_keys: 
+    account::resources::rsa_keys { $rsa_keys: 
       ensure   => $ensure,
       username => $username, 
     }

@@ -10,7 +10,7 @@
 #
 # Copyright 2014 Agix Pty Ltd. All Rights Reserved.
 #
-define acount::rsa_keys (
+define acount::resources::rsa_keys (
   $ensure         = present,
   $username       = $name,
   $ssh_key_type   = 'ssh-rsa',
