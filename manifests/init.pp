@@ -106,7 +106,8 @@ define account(
   $manage_home = true, $home_dir = undef,  $home_dir_perms = '0750',
   $create_group = true, $system = false, $uid = undef, $ssh_key = undef,
   $ssh_key_type = 'ssh-rsa', $groups = [], $ensure = present,
-  $comment= "${title} Puppet-managed User", $gid = 'users', $ssh_keys = undef
+  $comment= "${title} Puppet-managed User", $gid = 'users', $ssh_keys = undef,
+  $rsa_keys = undef
 ) {
 
   if $home_dir == undef {
