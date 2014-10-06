@@ -11,10 +11,10 @@
 # Copyright 2014 Agix Pty Ltd. All Rights Reserved.
 #
 define account::resources::ssh_authorized_keys (
-  $ensure         = present,
-  $username       = $name,
-  $ssh_key_type   = 'ssh-rsa',
-  $ssh_key        = $name,
+  $ensure = present,
+  $user   = $name,
+  $type   = 'ssh-rsa',
+  $key    = $name,
 ) {
   $the_md5   = str2md5($ssh_key)
   $full_name = "${username}-${the_md5}"

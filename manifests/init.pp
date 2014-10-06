@@ -239,7 +239,7 @@ define account(
     account::resources::ssh_authorized_keys{ $rsa_keys: 
       ensure   => $ensure,
       type     => 'ssh-rsa',
-      username => $username, 
+      user     => $username, 
     }
   }
 
@@ -250,7 +250,7 @@ define account(
     account::resources::ssh_authorized_keys{ $rsa_keys: 
       ensure   => $ensure,
       type     => 'ssh-dsa',
-      username => $username, 
+      user     => $username, 
     }
   }
 }
