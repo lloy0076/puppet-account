@@ -10,6 +10,23 @@
 #
 # Copyright 2014 Agix Pty Ltd. All Rights Reserved.
 #
+# === Parameters
+#
+# [*ensure*]
+#   Whether the key should be present or not.
+# Defaults to present.
+#
+# [*user*]
+#   The user associated with the key.
+# This is set to the class name. 
+#
+# [*type*]
+#   The key type; one of 'ssh-rsa' or 'ssh-dsa'.
+# Defeaults to 'ssh-rsa'. 
+#
+# [*key*]
+#   The key.
+#
 define account::resources::ssh_authorized_keys (
   $ensure = present,
   $user   = $name,
