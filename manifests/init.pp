@@ -111,7 +111,7 @@ define account(
   $create_group = true, $system = false, $uid = undef, $ssh_key = undef,
   $ssh_key_type = 'ssh-rsa', $groups = [], $ensure = present,
   $comment= "${title} Puppet-managed User", $gid = 'users', $ssh_keys = undef,
-  $rsa_keys = undef, $dsa_keys,
+  $rsa_keys = undef, $dsa_keys = undef,
 ) {
 
   if $home_dir == undef {
