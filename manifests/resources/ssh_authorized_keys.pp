@@ -33,12 +33,12 @@ define account::resources::ssh_authorized_keys (
   $type   = 'ssh-rsa',
   $key    = $name,
 ) {
-  $the_md5   = str2md5($ssh_key)
-  $full_name = "${username}-${the_md5}"
+  $the_md5   = str2md5($key)
+  $full_name = "${user}-${the_md5}"
 
   ssh_authorized_key { $full_name:
-    user => $username,
-    type => $ssh_key_type,
-    key  => $ssh_key,
+    user => $user,
+    type => $type,
+    key  => $key,
   }
 }
