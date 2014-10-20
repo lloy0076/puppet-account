@@ -129,7 +129,7 @@ define account(
     }
   }
   else {
-      $home_dir_real = $home_dir
+    $home_dir_real = $home_dir
   }
 
   if $create_group == true {
@@ -157,19 +157,18 @@ define account(
     $primary_group = $gid
   }
 
-
   case $ensure {
     present: {
       $dir_ensure = directory
       $dir_owner  = $username
       $dir_group  = $primary_group
-      User[$title] -> File["${title}_home"] -> File["${title}_sshdir"]
+      User[$title] -> File[$home_dir_real] -> File["${home_dir_real}/.ssh"]
     }
     absent: {
       $dir_ensure = absent
       $dir_owner  = undef
       $dir_group  = undef
-      File["${title}_sshdir"] -> File["${title}_home"] -> User[$title]
+      File["${home_dir_real}/.ssh"] -> File[$home_dir_real] -> User[$title]
     }
     default: {
       err( "Invalid value given for ensure: ${ensure}. Must be one of present,absent." )
@@ -191,20 +190,22 @@ define account(
       system     => $system,
   }
 
-  file {
-    "${title}_home":
+  if ! defined(File[$home_dir_real]) {
+    file { $home_dir_real:
       ensure  => $dir_ensure,
-      path    => $home_dir_real,
       owner   => $dir_owner,
       group   => $dir_group,
-      mode    => $home_dir_perms;
+      mode    => $home_dir_perms,
+    }
+  }
 
-    "${title}_sshdir":
+  if ! defined(File["${home_dir_real}/.ssh"]) {
+    file { "${home_dir_real}/.ssh":
       ensure  => $dir_ensure,
-      path    => "${home_dir_real}/.ssh",
       owner   => $dir_owner,
       group   => $dir_group,
-      mode    => '0700';
+      mode    => '0700',
+    }
   }
 
   if $ssh_key != undef {
